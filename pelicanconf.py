@@ -1,6 +1,6 @@
 AUTHOR = 'Nathan Van Maastricht'
 SITENAME = 'Nathan Van Maastricht Blog'
-SITEURL = ""
+SITEURL = "https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog"
 
 PATH = "content"
 
