@@ -1,6 +1,6 @@
 AUTHOR = 'Nathan Van Maastricht'
 SITENAME = 'Nathan Van Maastricht Blog'
-SITEURL = "https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog"
+# SITEURL = "https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog"
 
 PATH = "content"
 
@@ -21,9 +21,11 @@ LINKS = (
     ("Github", "https://github.com/Nathan-Van-Maastricht")
 )
 
-# Social widget
-SOCIAL = (
-)
+ARTICLE_URL = 'articles/{date:%Y}/{date:%m}/{slug}.html'
+ARTICLE_SAVE_AS = 'articles/{date:%Y}/{date:%m}/{slug}.html'
+
+PAGE_URL = "pages/{date:%Y}/{date:%m}/{slug}.html"
+PAGE_SAVE_AS = "pages/{date:%Y}/{date:%m}/{slug}.html"
 
 DEFAULT_PAGINATION = 10
 
