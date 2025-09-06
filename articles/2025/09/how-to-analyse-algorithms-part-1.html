@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/theme/pygments/github.min.css">
+
+
+
+  <link rel="stylesheet" type="text/css" href="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/theme/font-awesome/css/solid.css">
+
+
+
+
+
+
+<script type="text/javascript">
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'G-S4XSZFZ0ZK', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+ 
+
+<meta name="author" content="Nathan Van Maastricht" />
+<meta name="description" content="Introduction When talking about an algorithms complexity, we are typically referring to an estimate of the time and space required to execute the algorithm. For this article, we will focus on the time requirements, but the space requirements are quite analogous. Normally the time and space required are functions of …" />
+<meta name="keywords" content="algorithms, education, analysis">
+
+
+  <meta property="og:site_name" content="Nathan Van Maastricht Blog"/>
+  <meta property="og:title" content="How to Analyse Algorithms (Part 1)"/>
+  <meta property="og:description" content="Introduction When talking about an algorithms complexity, we are typically referring to an estimate of the time and space required to execute the algorithm. For this article, we will focus on the time requirements, but the space requirements are quite analogous. Normally the time and space required are functions of …"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/articles/2025/09/how-to-analyse-algorithms-part-1.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2025-09-06 18:22:00+09:30"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/author/nathan-van-maastricht.html">
+  <meta property="article:section" content="Algorithms"/>
+  <meta property="article:tag" content="algorithms"/>
+  <meta property="article:tag" content="education"/>
+  <meta property="article:tag" content="analysis"/>
+  <meta property="og:image" content="">
+
+  <title>Nathan Van Maastricht Blog &ndash; How to Analyse Algorithms (Part 1)</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/">
+      <img src="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/theme/img/profile.png" alt="" title="">
+    </a>
+
+    <h1>
+      <a href="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/"></a>
+    </h1>
+
+
+
+    <nav>
+      <ul class="list">
+
+
+            <li>
+              <a target="_self"
+                 href="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/pages/about.html#about">
+                About
+              </a>
+            </li>
+
+          <li>
+            <a target="_self" href="https://www.linkedin.com/in/nathan-van-maastricht-72a177324/" >LinkedIn</a>
+          </li>
+          <li>
+            <a target="_self" href="https://github.com/Nathan-Van-Maastricht" >Github</a>
+          </li>
+      </ul>
+    </nav>
+
+  </div>
+
+</aside>
+  <main>
+
+
+<article class="single">
+  <header>
+      
+    <h1 id="how-to-analyse-algorithms-part-1">How to Analyse Algorithms (Part 1)</h1>
+    <p>
+      Posted on Sat 06 September 2025 in <a href="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/category/algorithms.html">Algorithms</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <h1>Introduction</h1>
+<p>When talking about an algorithms complexity, we are typically referring to an estimate of the time and space required to execute the algorithm. For this article, we will focus on the time requirements, but the space requirements are quite analogous. Normally the time and space required are functions of the size of the algorithms input.</p>
+<h1>Complexity</h1>
+<h2>Building intuition</h2>
+<p>A question that is naturally arising is, how do we standardise the measurement of the time required for an algorithm to run? We'll first introduce a barometer instruction.</p>
+<dl>
+<dt>Barometer Instruction</dt>
+<dd>The instruction that is executed the most number of times in an algorithm</dd>
+</dl>
+<p>While it is not a perfect measure of the number of operations in an algorithm, it is often proportional to the algorithm's running time.</p>
+<p>The following code block is a simple linear search, that takes in an array and a target that is guaranteed to be in the array, and returns the index of the target</p>
+<div class="highlight"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">linear_search</span><span class="p">(</span><span class="k">array</span><span class="p">,</span><span class="w"> </span><span class="n">target</span><span class="p">)</span><span class="err">:</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="k">array</span><span class="p">.</span><span class="nl">length</span><span class="p">:</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="k">array</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nl">target</span><span class="p">:</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">i</span>
+</code></pre></div>
+
+<p>A barometer instruction for this algorithm is the expression <code>array[i] == target</code>, and there are others, but we start to get lost in nuance if we talk talk too much about that, so for now, we will take this expression as our barometer instruction.</p>
+<p>How often is our barometer running though? There are three cases:</p>
+<ol>
+<li>Best case: The target is found in first element of the array and we make one comparison</li>
+<li>Worst case: The target is in the last position of the array and we do <span class="math">\(n\)</span> comparisons</li>
+<li>Average case: The average case is more complex. We need to make an assumption, that the target has equal probability to be in any of the locations in the array. In that case, we have to do 1 comparison if it is in the first location, two if it is in the second, and so on, all the way up to <span class="math">\(n\)</span> comparisons if it is in the last location. The expected number of comparisons we need to make is then the sum of the probability it is in location <span class="math">\(i\)</span>, multiplied by the number of comparisons required if it is there. That is, <div class="math">$$\sum_{i=1}^ni\times\frac{1}{n}=\frac{n+1}{2}$$</div> so the average case the algorithm does <span class="math">\(\frac{n+1}{2}\)</span> operations.</li>
+</ol>
+<h2>Complexity classes</h2>
+<p>So now that we have seen a simple example, how do we actually compare algorithms time complexity? Well first, in general we'll talk about the worst case because that's what every other introduction to complexity works too, but there are examples where the average case is actually used in practice (for example, quicksort is in the worst case worse than merge sort).</p>
+<p>When we're talking about the worst case behaviour of an algorithm, it's typically in the context of a large input. The nuance of smaller inputs is often overlooked, and maybe an algorithm that has poor performance for big inputs is actually really good for your use case because you know what your inputs can be so you can perform more specific analysis rather than a random input analysis.</p>
+<p>So if all we care about is how it grows as the input grows, we really only care about the highest order term when calculating the number of times a barometer instruction is called. For example, if we have the function </p>
+<div class="math">$$t(n)=2n^2+5n+1$$</div>
+<p> when <span class="math">\(n\)</span> is small, say <span class="math">\(n=1\)</span>, then <span class="math">\(t(1)=2\times1^2+5\times1+1=8,\)</span> and the linear term actually matters. But when <span class="math">\(n\)</span> is even just slightly larger, say <span class="math">\(n=10,\)</span> then we get <span class="math">\(t(10)=2\times10^2+5\times10+1=251,\)</span> and the linear term is contributing a lot less. As <span class="math">\(n\)</span> gets even bigger, the linear term matters less and less. And we haven't even talked about how little that poor 1 at the end matters.</p>
+<p>Making a small mathematical leap, we can see that the ratio between <span class="math">\(t(n)\)</span> and the function <span class="math">\(2n^2\)</span> goes to 1 as <span class="math">\(n\rightarrow\infty\)</span>, that is </p>
+<div class="math">$$\lim_{n\rightarrow\infty}\frac{2n^2+5n+1}{2n^2}=1.$$</div>
+<p>When we're talking about the complexity of an algorithm we barely even care about the coefficient of the highest order term, and often just throw that away too. But we can formalise that idea, which in my experience is where a lot of students start to struggle. Hopefully building up to the formal idea, rather than starting at the formal idea and working our way through examples gives some insight into how we've arrived at the formal idea and it helps someone.</p>
+<dl>
+<dt>Asymptotic Upper Bound, <span class="math">\(O(g(n))\)</span></dt>
+<dd>Let <span class="math">\(f(n)\)</span> and <span class="math">\(g(n)\)</span> be eventually nonnegative functions on the positive integers. Then we write <span class="math">\(f(n)=O(g(n))\)</span> if there exists a positive real number <span class="math">\(M\)</span> and a real number <span class="math">\(x_0\)</span> such that <span class="math">\(|f(x)|\leq Mg(x)\)</span> for all <span class="math">\(x\geq x_0\)</span>.</dd>
+</dl>
+<p>So yeah, that's a hard to parse definition if you're not used to reading maths. To try to get a feel for it we'll start at the end. For every <span class="math">\(x\)</span> bigger than some value, which we're labelling <span class="math">\(x_0\)</span>, which we can interpret as every <span class="math">\(x\)</span> that is to the right of some point on a plot, the function <span class="math">\(f\)</span> is smaller than the function <span class="math">\(g\)</span>, and we can multiply <span class="math">\(g\)</span> by some number if we really want to make it true, but it has to be the same number for every possible <span class="math">\(x\)</span> to the right of our magic point.</p>
+<p>So circling back to our example from earlier, we had <span class="math">\(t(n)=2n^2+5n+1\)</span>. We need to find a function <span class="math">\(g\)</span> that is no smaller than <span class="math">\(t(n)\)</span> after some value of <span class="math">\(n\)</span>, but we're only allowed to user the <span class="math">\(n^2\)</span> term. It's easy if <span class="math">\(t(n)=2n^2\)</span>, we can just use <span class="math">\(g(n)=2n^2\)</span>. Unfortunately it is not that easy, but we can start building up our function <span class="math">\(g\)</span> from here. The next term that we need to account for is the <span class="math">\(5n\)</span> term, and at some point <span class="math">\(5n^2\geq 5n\)</span>, so we can tack that onto our <span class="math">\(g\)</span> function to get <span class="math">\(g(n)=2n^2+5n^2\)</span>. We do still have to worry about the <span class="math">\(1\)</span> term, but hopefully it's easy to see that <span class="math">\(n^2\)</span> will also be bigger than <span class="math">\(1\)</span> at some point, so we can update our <span class="math">\(g\)</span> function be </p>
+<div class="math">$$g(n)=2n^2+5n^2+n^2=8n^2$$</div>
+<p> and because each of the terms within this function is at least as big as the corresponding terms in <span class="math">\(t(n)\)</span>, then we know that the identity </p>
+<div class="math">$$t(n)\leq g(n)=8n^2$$</div>
+<p> holds, so we know that <span class="math">\(g\)</span> is an upper bound for <span class="math">\(t\)</span>. We even know what a possible constant (the <span class="math">\(M\)</span>) the definition asks for can be, <span class="math">\(8\)</span> in this case. So we can now write that </p>
+<div class="math">$$t(n)=O(n^2),$$</div>
+<p> which is read as "t of n is big O of <span class="math">\(n^2\)</span>."</p>
+<p>So this is great, we can approximate the run time of algorithms we design using big O notation, and that can give us an upper bound on just how bad it can be. There are plenty of cases where we want to know that we're going to have to wait at least a certain amount of time too. There is an analogous concept called the asymptotic lower bound.</p>
+<dl>
+<dt>Asymptotic Lower Bound, <span class="math">\(\Omega(g(n))\)</span></dt>
+<dd>Let <span class="math">\(f(n)\)</span> and <span class="math">\(g(n)\)</span> be eventually nonnegative functions on the positive integers. Then we write <span class="math">\(f(n)=\Omega(g(n))\)</span> if there exists a positive real number <span class="math">\(M\)</span> and a real number <span class="math">\(x_0\)</span> such that <span class="math">\(|f(x)|\geq Mg(x)\)</span> for all <span class="math">\(x\geq x_0\)</span>.</dd>
+</dl>
+<p>This is often less cumbersome to calculate than the upper bound, although care does need to be taken in the case of negative coefficients in our function. In our case we have the chain of inequalities </p>
+<div class="math">$$2n^2\leq2n^2+5n\leq2n^2+5n+1$$</div>
+<p> and so trivially we get the value for our constant being <span class="math">\(2\)</span> in this case. So we can write that </p>
+<div class="math">$$t(n)=\Omega(n^2),$$</div>
+<p> which reads as "t of n is omega of <span class="math">\(n^2\)</span>."</p>
+<p>Naturally the question arises about the upper and lower bound being equal, and yes, there is a tight bound, and it's definition is a combination of the lower and upper bound at the same time.</p>
+<dl>
+<dt>Asymptotic Tight Bound, <span class="math">\(\Theta(g(n))\)</span></dt>
+<dd><span class="math">\(f(n)\)</span> and <span class="math">\(g(n)\)</span> be eventually nonnegative functions on the positive integers. Then we write <span class="math">\(f(n)=\Theta(g(n))\)</span> if there exists positive real numbers <span class="math">\(M_1,M_2\)</span> and a real number <span class="math">\(x_0\)</span> such that <span class="math">\(M_1g(x)\leq f(x)\leq M_2g(x)\)</span> for all <span class="math">\(x\geq x_0\)</span>.</dd>
+</dl>
+<p>This definition on the surface seems more complex than the previous two, there are two constants after all, but it really just says that if <span class="math">\(f(n)=\Theta(g(n))\)</span> if both <span class="math">\(f(n)=O(g(n))\)</span> and <span class="math">\(f(n)=\Omega(n)\)</span> at the same time.</p>
+<h1>Combining Intuition and Formalism</h1>
+<p>Now that we've seen the formal definition, we can apply it back to where we were building intuition. We know there are <span class="math">\(n\)</span> comparisons that need to be done in the worst case for our linear search function. So the function is <span class="math">\(O(n)\)</span> because <span class="math">\(n\leq 1\times n\)</span> so our constant can just be <span class="math">\(1\)</span> in this case. Likewise, it is also <span class="math">\(\Omega(n)\)</span>, and the constant can again be <span class="math">\(1\)</span>. Because it is both <span class="math">\(O(n)\)</span> and <span class="math">\(\Omega(n)\)</span>, then we automatically get that it is <span class="math">\(\Theta(n)\)</span> as well.</p>
+<p>I mentioned earlier that if we know nothing about our input data, then there's not really much we can do other than assume the input data is random. What if it is not random though, what if the array we were passing in was sorted? Can we do better than <span class="math">\(\Theta(n)\)</span>? The answer is yes, we can do as well as <span class="math">\(\Theta(\log(n))\)</span>, but that is for another post.</p>
+<h1>Conclusion</h1>
+<p>Do people actually talk like this? All these big O's, <span class="math">\(\Omega\)</span>'s, and <span class="math">\(\Theta\)</span>'s? If we have to be precise, sure, but the everyday parlance for talking about runtime complexity is to use "big O". In most situations where it is coming up everyone will understand you to mean it's the smallest upper bound for the run time of the function. Don't get too hung up on that though, when you're talking to a group of people the agreed upon vocabulary will quickly become apparent even without directly communicating about what it will be.</p>
+<p>Do not forget, this analysis is for "large" inputs (where large may actually be really small still). Think about the input your functions are actually going to receive. Maybe the standard choice of function isn't actually the best choice for your particular use case.</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/tag/algorithms.html">algorithms</a>
+      <a href="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/tag/education.html">education</a>
+      <a href="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/tag/analysis.html">analysis</a>
+    </p>
+  </div>
+
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy;  </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Nathan Van Maastricht Blog ",
+  "url" : "https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog",
+  "image": "",
+  "description": ""
+}
+</script>
+</body>
+</html>
