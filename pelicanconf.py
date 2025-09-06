@@ -1,6 +1,6 @@
 AUTHOR = 'Nathan Van Maastricht'
 SITENAME = 'Nathan Van Maastricht Blog'
-# SITEURL = "https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog"
+SITEURL = ""
 
 PATH = "content"
 
@@ -24,10 +24,12 @@ LINKS = (
 ARTICLE_URL = 'articles/{date:%Y}/{date:%m}/{slug}.html'
 ARTICLE_SAVE_AS = 'articles/{date:%Y}/{date:%m}/{slug}.html'
 
-PAGE_URL = "pages/{date:%Y}/{date:%m}/{slug}.html"
-PAGE_SAVE_AS = "pages/{date:%Y}/{date:%m}/{slug}.html"
+PAGE_URL = "pages/{slug}.html"
+PAGE_SAVE_AS = "pages/{slug}.html"
 
 DEFAULT_PAGINATION = 10
+
+THEME = "themes/Flex"
 
 # Uncomment following line if you want document-relative URLs when developing
 # RELATIVE_URLS = True
