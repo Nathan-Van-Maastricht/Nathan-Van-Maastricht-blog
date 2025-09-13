@@ -1,0 +1,295 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/theme/stylesheet/style.min.css">
+
+
+    <link id="pygments-light-theme" rel="stylesheet" type="text/css"
+          href="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/theme/pygments/github.min.css">
+
+
+
+  <link rel="stylesheet" type="text/css" href="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/theme/font-awesome/css/fontawesome.css">
+  <link rel="stylesheet" type="text/css" href="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/theme/font-awesome/css/brands.css">
+  <link rel="stylesheet" type="text/css" href="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/theme/font-awesome/css/solid.css">
+
+
+
+
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S4XSZFZ0ZK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-S4XSZFZ0ZK');
+</script>
+
+
+
+
+
+
+ 
+
+<meta name="author" content="Nathan Van Maastricht" />
+<meta name="description" content="Introduction There&#39;s a game I play called Farmer Against Potatoes Idle. Much like is implied by the name, it is an idle game. For those not familiar with this genre of games, they are designed to require only occasional input. Cookie Clicker is another idle game, and was an instrumental …" />
+<meta name="keywords" content="maths, optimisation, hobbies">
+
+
+  <meta property="og:site_name" content="Nathan Van Maastricht Blog"/>
+  <meta property="og:title" content="Linear Programming for Fun"/>
+  <meta property="og:description" content="Introduction There&#39;s a game I play called Farmer Against Potatoes Idle. Much like is implied by the name, it is an idle game. For those not familiar with this genre of games, they are designed to require only occasional input. Cookie Clicker is another idle game, and was an instrumental …"/>
+  <meta property="og:locale" content="en_US"/>
+  <meta property="og:url" content="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/articles/2025/09/linear-programming-for-fun.html"/>
+  <meta property="og:type" content="article"/>
+  <meta property="article:published_time" content="2025-09-13 21:46:00+09:30"/>
+  <meta property="article:modified_time" content=""/>
+  <meta property="article:author" content="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/author/nathan-van-maastricht.html">
+  <meta property="article:section" content="Maths"/>
+  <meta property="article:tag" content="maths"/>
+  <meta property="article:tag" content="optimisation"/>
+  <meta property="article:tag" content="hobbies"/>
+  <meta property="og:image" content="">
+
+  <title>Nathan Van Maastricht Blog &ndash; Linear Programming for Fun</title>
+
+
+</head>
+<body class="light-theme">
+
+<aside>
+  <div>
+    <a href="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/">
+      <img src="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/theme/img/profile.png" alt="" title="">
+    </a>
+
+    <h1>
+      <a href="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/"></a>
+    </h1>
+
+
+
+    <nav>
+      <ul class="list">
+
+
+            <li>
+              <a target="_self"
+                 href="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/pages/about.html#about">
+                About
+              </a>
+            </li>
+
+          <li>
+            <a target="_self" href="https://www.linkedin.com/in/nathan-van-maastricht-72a177324/" >LinkedIn</a>
+          </li>
+          <li>
+            <a target="_self" href="https://github.com/Nathan-Van-Maastricht" >Github</a>
+          </li>
+      </ul>
+    </nav>
+
+  </div>
+
+</aside>
+  <main>
+
+
+<article class="single">
+  <header>
+      
+    <h1 id="linear-programming-for-fun">Linear Programming for Fun</h1>
+    <p>
+      Posted on Sat 13 September 2025 in <a href="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/category/maths.html">Maths</a>
+
+    </p>
+  </header>
+
+
+  <div>
+    <h1>Introduction</h1>
+<p>There's a game I play called Farmer Against Potatoes Idle. Much like is implied by the name, it is an idle game. For those not familiar with this genre of games, they are designed to require only occasional input. Cookie Clicker is another idle game, and was an instrumental game in popularising the category.</p>
+<p>Because of the idle nature though, there is a lot of room within these games to gain or lose efficiencies. To combat some of these efficiency problems, I decided to write a little optimiser for one aspect of the game, the pet system.</p>
+<p>The story of the game is you are a farmer who woke up in the middle of a field and you are being attacked by a horde of mutated potatoes. One goal you might have is to complete the last world in the game, and to do that you need to make your farmer stronger. Once you get far enough through the game the pet system becomes available to you, and you can start using a party of pets.</p>
+<h1>Pets</h1>
+<p>Pets are an integral part to the game, providing bonuses to stats such as how good items are, experience, and proxy stats that give you more health, more damage, and proxies for other proxies. The entire game is a large, non linear combination of proxies for strength and health essentially, and pets are just one of these aspects, but is also one of the more interesting mechanics in my opinion.</p>
+<p>All pets are classified in two classes, either Ground or Air. Each pet has at least one bonus it gives to your farmer, but most pets have more than one. Each pet has a level, but I have picked to ignore this aspect as typically you would maximise the level of the pet if you're going to use it. Each party can have up to six pets, and within a party you are only allowed up to three Ground pets and three Air pets.</p>
+<h1>Optimising Pets</h1>
+<p>If an appropriate team of pets is not selected, then parts of the game can take up to days longer at each stage, which could mean instead of playing for 5000 hours, you could be sitting at 7000 hours. This process isn't necessary, but it does save a lot of time and make the sense of progress feel faster! So lets talk about how I wrote an optimiser for my "base" party of pets.</p>
+<p>The optimiser is pretty simple. I've used Binary Integer Linear Programming approach for it as it is a problem that naturally maps to this tool. What I'm going to describe in this section is actually the first implementation I did, which worked great. I later refined the linear program though to make it easier to select exactly what types of bonuses I wanted, although I did not make the workflow for using that program particularly great (it is actually bad)</p>
+<h2>High Level Linear Program</h2>
+<p>This section will list of the linear program at a high level, leaving out any maths, this is essentially the documentation.</p>
+<dl>
+<dt>Objective function</dt>
+<dd>Maxmisie the number of bonuses</dd>
+</dl>
+<p>We do have a couple of constraints too.</p>
+<p>The first type of constraints is on the number of pets, and there are three.</p>
+<dl>
+<dt>Maximum number of pets</dt>
+<dd>Total pets used needs to be less than or equal to six.</dd>
+<dt>Maximum number of Air pets</dt>
+<dd>Total number of Air pets needs to be less than or equal to three.</dd>
+<dt>Maximum number of Ground pets</dt>
+<dd>Total number of Ground pets needs to be less than or equal to three.</dd>
+</dl>
+<p>Conveniently the two specific constraints on the types implies the more general less than six, so we don't actually need that constraint. In some cases it is better to over do it on the constraints and let the solver work it out, but in this case our problem space is so small I didn't actually waste the time writing the associated code.</p>
+<p>We also have more auxiliary constraints related to the relationship between the pets and the pets bonuses.</p>
+<dl>
+<dt>Pet <span class="math">\(\Rightarrow\)</span> Bonus</dt>
+<dd>If a pet is selected, then we need to indicate that all the bonuses associated with that pet is also selected.</dd>
+<dt>Bonus <span class="math">\(\Rightarrow\)</span> Pet</dt>
+<dd>Similarly, if a bonus is selected, then at least one pet with that bonus needs to be selected too.</dd>
+</dl>
+<p>These two constraints ensure that no pet is selected without recording the bonus is counted, and at the same time, a bonus can't be counted unless there is a pet with that bonus selected.</p>
+<p>This set of constraints is sufficient to capture our entire problem, so we can formalise it, and then write some code to automate finding the optimal solution.</p>
+<h2>Mathematical Definition</h2>
+<h3>Variables</h3>
+<p>First we'll introduce our variables, with potentially some abuse of notation. We have two types of decision variables that are both binary.</p>
+<p>For each pet, <span class="math">\(p\)</span> it has an identifier, <span class="math">\(i\)</span>, it has a type <span class="math">\(t\in{\text{Air}, \text{Ground}}\)</span>, and an associated set of bonuses <span class="math">\(B\)</span>. We will denote the binary variable </p>
+<div class="math">$$p_{i,t}^B.$$</div>
+<p>For each bonus, <span class="math">\(b\)</span> it is much simpler, we just have an indentifier, <span class="math">\(j\)</span>, and we will denote the binary variable </p>
+<div class="math">$$b_j.$$</div>
+<h3>Objective</h3>
+<p>Due to the decision to include variables for the bonuses, this makes the objective trivial to write out, we just add up all of them which tells us how many bonuses have been selected, and we want to maximise the number of bonuses.</p>
+<div class="math">$$\max\sum_{j}b_j.$$</div>
+<h3>Constraints</h3>
+<p>There are four constraints in total, given that we don't need a constraint for the total number of pets as it is implied by the two constraints for the type of pet.</p>
+<dl>
+<dt>Maximum number of Air pets</dt>
+<dd>Total number of Air pets needs to be less than or equal to three, can be formalised as <div class="math">$$\sum_{i}p_{i,t}^B\leq3\text{ where } t=\text{Air}$$</div>
+</dd>
+<dt>Maximum number of Ground pets</dt>
+<dd>Total number of Ground pets needs to be less than or equal to three, can be formalised as <div class="math">$$\sum_{i}p_{i,t}^B\leq3\text{ where } t=\text{Ground}$$</div>
+</dd>
+</dl>
+<p>These two constraints are hopefully easy enough to grasp. We are adding up the value of the binary variable for each of the Air or Ground pets, and only three of them are allowed to be set to a 1, the rest need to be 0.</p>
+<dl>
+<dt>Pet <span class="math">\(\Rightarrow\)</span> Bonus</dt>
+<dd>If a pet is selected, then we need to indicate that all the bonuses associated with that pet is also selected. This is slightly more complex to understand the formalism, for every element in the set <span class="math">\(B\)</span> associated with a pet <span class="math">\(i\)</span>, we need to make sure the corresponding variable for that bonus is at least as big as the variable for the pet's variable. That is, if the pet variable is set to 0, then the variable for the bonus can be either 0 or 1. But if the pet is selected, then the variable has to be exactly 1.</dd>
+</dl>
+<div class="math">$$p_{i,t}^{B}\leq b_j \text{ for all } b_j\in B.$$</div>
+<p>Because of the unconstrained nature of the bonus variables when a pet isn't selected, we do need to make sure we can't indicate a variable is selected when there is no pet with that bonus selected. Otherwise the objective function would just select every bonus, which maximises the objective function.</p>
+<dl>
+<dt>Bonus <span class="math">\(\Rightarrow\)</span> Pet</dt>
+<dd>Similarly, if a bonus is selected, then at least one pet with that bonus needs to be selected too. Unfortunately, this is the hardest constraint to understand, although in the world of binary constraints, it could be worse. For each of the bonus we want to sum the variables for the pets that contain those bonuses, and make sure the variable for the bonus is less than that sum. So if 0 pets with that bonus is selected, the sum will be 0 and we have fixed the problem of counting bonuses that don't actually have a pet with that bonus. As a sanity check to make sure we haven't messed up the counting in other ways, if at least one pet is selected, then the sum will be at least 1, and the variable will be allowed to be 0 or 1. Combining that with the previous constraint though, and we get that it is not allowed to be 0 if a pet is selected with it, so it is forced to be 1. This is where the biggest abuse of notation is going to come in, our sum is going to be over the pets that have the bonus in their bonus set <div class="math">$$b_j\leq\sum_{b_j\in B}p_{i,t}^B.$$</div>
+</dd>
+</dl>
+<h3>Solving</h3>
+<p>There are many libraries for solving binary integer linear programming problems, both open source and otherwise. In this case I used <a href="https://highs.dev/">HiGHS</a>, which I have been exploring more recently. I have also used <a href="https://developers.google.com/optimization">OR-Tools</a> in the past.</p>
+<p>You do need to find the appropriate data, or collect it on your own while playing the game. I haven't found a full dataset yet, but the wiki for the game links to an out of date subset of the data, that has not been patched, and is the underlying data used by another <a href="https://erik434.github.io/fapi-pets/">useful tool</a> for tracking pets and pet combos (which we have completely ignored in this post). The list that I currently have is on my <a href="https://github.com/Nathan-Van-Maastricht/fapi_optimiser">github</a>, and is being updated as I get access to more pets. There is probably a way to find this information more effectively, but on a personal note, I enjoy the anticipation of finding out if my team is going to change when I find a new pet or not.</p>
+<h2>Summary</h2>
+<p>Was doing any of this work essential to playing an idle game that I probably shouldn't actually care too much about to begin with? Absolutely not. Was it fun to do this little bit of work to optimise just a little bit of my life? Absolutely yes. The pet system isn't the only aspect of the game that can be optimised, but like I said earlier, I think it's the most interesting. Almost every other optimisation can be done on the fly with heuristics that can be played out in your head. At least with the pet system though, there is optimal solutions which are hard to just stumble across.</p>
+<p>As for limitations with this model, I alluded to a couple throughout this post, and this isn't even the optimiser I use anymore. I now have a further constraint that says exactly how many bonuses I want, and then my objective function maximises the number of times particular bonuses are selected given the total number of bonuses is fixed.</p>
+<p>There is also the aspect of pet levels and how that impacts the bonuses. The higher the level the more of the bonus you get. I swept this under the rug by saying you maximise the level as fast as possible so it doesn't really matter, but this is not entirely true, for some pets the requirements to level it up are restrictive, so it takes time. I haven't incorporated this into the solver at all, but it is something I occasionally think about doing, but I don't belive the return will be worth it.</p>
+<p>And finally, this is not the only aspect of my life I have applied linear programming to, obviously in my professional life I have used it numerous times, but in my day to day it will occasionally make an appearance too. Linear programming is a very useful tool, especially if the constraints are relatively natural to write. With the massive amount of progress over the last few years on the solvers too, more and more problems can actually be solved in practice too, which is great! Some will argue I'm optimising away the fun, but the process of doing the optimisation is a lot of fun to me too.</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script>
+  </div>
+  <div class="tag-cloud">
+    <p>
+      <a href="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/tag/maths.html">maths</a>
+      <a href="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/tag/optimisation.html">optimisation</a>
+      <a href="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/tag/hobbies.html">hobbies</a>
+    </p>
+  </div>
+
+
+
+
+
+
+
+</article>
+
+<footer>
+<p>&copy;  </p>
+<p>
+Built with <a href="http://getpelican.com" target="_blank">Pelican</a> using <a href="http://bit.ly/flex-pelican" target="_blank">Flex</a> theme
+</p></footer>  </main>
+
+<script type="application/ld+json">
+{
+  "@context" : "http://schema.org",
+  "@type" : "Blog",
+  "name": " Nathan Van Maastricht Blog ",
+  "url" : "https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog",
+  "image": "",
+  "description": ""
+}
+</script>
+</body>
+</html>
