@@ -27,21 +27,21 @@ The solution to the problem of both reconstruction and classifying is in roughly
 
 The following is an example of a raw $28\times28$ image (scaled up) from the MNIST dataset. The digit can appear anywhere within the image, at any size.
 
-![Raw MNIST example](/images/mnist_reconstruct_classify/raw_example.png)
+![Raw MNIST example](../../../images/mnist_reconstruct_classify/raw_example.png)
 
 So the first natural distortion to make to the image is a translation. I took care to ensure that none of the non-zero values of the image left the view, that is the entire digit is still visible. I've been calling this translated image the "clean" image throughout my code, and is what the reconstructing network is going to try to reproduce.
 
 The first true distortion that I apply is to zero out some rows and columns. I decided on 14 rows and 14 columns of the image empirically, too much less than that seemed far too easy for the network, and more than that made it too hard for me, and I didn't want to lose to a network. I've been, very creatively, calling this distortion "remove rows and columns". The following is an example of this type of distortion.
 
-![Remove Row and Column example (4)](/images/mnist_reconstruct_classify/remove_rows_columns.png)
+![Remove Row and Column example (4)](../../../images/mnist_reconstruct_classify/remove_rows_columns.png)
 
 The second distortion I have applied adds some Gaussian noise with a mean of 0 and a standard deviation of 0.5 to the image, and then clamps the image to be back to grayscale, that is, if a number is less than 0, it is made to be 0, and if it is greater than 1, it is made to be 1. I personally find these images relatively easy to determine what the correct label is, so I wasn't particularly worried about being beaten by the network in these cases. I have been calling this distortion "clamping". The following is an example of this type of distortion.
 
-![Clamping example (5)](/images/mnist_reconstruct_classify/clamp.png)
+![Clamping example (5)](../../../images/mnist_reconstruct_classify/clamp.png)
 
 The third and final distortion I have applied adds the same Gaussian noise, mean 0 and standard deviation of 0.5, but instead of immediately clamping it first takes the fractional part of it, then applies the clamping. This has the effect than positive numbers remain positive, and negative numbers go to 0. To give a few examples. If the original value in the image was 0.9, and then the Gaussian noise added was 0.2, the resulting pixel would have a value of 1.1, which is then translated to 0.1. So an almost white pixel gets mapped to an almost black pixel. On the other hand, if the pixel started off at 0.1, and a negative value was sampled from the Gaussian noise, such as -0.2, then the pixel value would be -0.1, which would get mapped to 0. I find this distortion to be much harder than the previous one to determine the original label, there is a good chance the model I have trained is better than me at this. I have been calling this type of distortion "fractional". The following is an example of this type of distortion.
 
-![Fractional example (1)](/images/mnist_reconstruct_classify/fractional.png)
+![Fractional example (1)](../../../images/mnist_reconstruct_classify/fractional.png)
 
 To prepare the data for training, I make three copies of it. One copy is associated with each of the true distortions, and all three of them are associated with the translation distortion. Each time a sample is selected, a the translation is first applied, and that image is called the "clean" image, which is the one that is trying to be reconstructed. Then the "noisy" image is made by the appropriate distortion algorithm. The classification and reconstruction both are done from this noisy image.
 
@@ -228,17 +228,17 @@ Recall that the model is trained on the noisy images, so the classifier has neve
 
 Given that this was a side quest on the primary purpose of the project, I am very happy with these results. I am particularly happy with the clean set classification given that it had never actually seen any of those images, and it was learning to classify from images that looked like
 
-![Clamping example (5)](/images/mnist_reconstruct_classify/clamp.png)
+![Clamping example (5)](../../../images/mnist_reconstruct_classify/clamp.png)
 
 and
 
-![Fractional example (1)](/images/mnist_reconstruct_classify/fractional.png)
+![Fractional example (1)](../../../images/mnist_reconstruct_classify/fractional.png)
 
 ## Reconstruction
 
 Reconstruction is harder to quantitatively measure. The loss went down, that's obviously going to happen though and doesn't prove anything. So here is a visual. The top row is the clean images (the originals and a translation). The second row is the images after the noise is applied. The third is the reconstructed images. The title of each column indicates what the true label was, and what the label from the classifier was from the noisy image. This data is from a random shuffle of the test set and has not been hand selected (more on this later).
 
-![Reconstructed example](/images/mnist_reconstruct_classify/reconstructed.png)
+![Reconstructed example](../../../images/mnist_reconstruct_classify/reconstructed.png)
 
 Obviously the reconstructions aren't perfect, both 3's for example is reconstructed relatively poorly compared to the original image, but they both do still resemble a 3.
 
