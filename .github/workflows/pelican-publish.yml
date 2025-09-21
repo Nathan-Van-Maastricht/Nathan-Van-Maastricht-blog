@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pelican markdown pelican-render-math
+          pip install pelican markdown pelican-render-math pelican-readtime
 
       - name: Build and deploy
         env:
