@@ -34,6 +34,9 @@
         &#8226; {{ _('%(minutes)s min read', minutes=article.stats['read_mins']) }}
       {% endif %}
     </p>
+    <p>
+      Read time: {{ article.readtime_string }}
+    </p>
   </header>
 
   {% if GOOGLE_ADSENSE and GOOGLE_ADSENSE.ads.article_top %}

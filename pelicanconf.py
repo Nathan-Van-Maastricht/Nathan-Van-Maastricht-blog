@@ -34,4 +34,14 @@ THEME = "themes/Flex"
 # Uncomment following line if you want document-relative URLs when developing
 # RELATIVE_URLS = True
 
-PLUGINS = ["render_math"]
+PLUGINS = ["render_math", "readtime"]
+READ_TIME = True
+READTIME_WPM = {
+    "default": {
+        "wpm": 200,
+        "min_singular": "minute",
+        "min_plural": "minutes",
+        "sec_singular": "second",
+        "sec_plural": "seconds",
+    }
+}
