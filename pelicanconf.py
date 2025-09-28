@@ -34,7 +34,7 @@ THEME = "themes/Flex"
 # Uncomment following line if you want document-relative URLs when developing
 # RELATIVE_URLS = True
 
-PLUGINS = ["render_math", "readtime"]
+PLUGINS = ["render_math", "readtime", "sitemap"]
 READ_TIME = True
 READTIME_WPM = {
     "default": {
@@ -44,4 +44,10 @@ READTIME_WPM = {
         "sec_singular": "second",
         "sec_plural": "seconds",
     }
+}
+
+SITEMAP = {
+    "format": "xml",
+    "priorities": {"articles": 0.75, "indexes": 0.5, "pages": 0.95},
+    "changefreqs": {"articles": "monthly", "indexes": "daily", "pages": "monthly"},
 }
