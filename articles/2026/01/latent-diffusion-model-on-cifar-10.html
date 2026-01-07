@@ -45,13 +45,13 @@
  
 
 <meta name="author" content="Nathan Van Maastricht" />
-<meta name="description" content="Project This project builds a Latent Diffusion Model (LDM) on CIFAR-10 that has been upscaled to 64x64. Introduction After exploring diffusion on MNIST datasets, I have continued exploring more, successfully build a LDM on CIFAR-10 data. This post covers the first phase of a currently three month project helping to …" />
+<meta name="description" content="Project This project builds a Latent Diffusion Model (LDM) on CIFAR-10 that has been upscaled to 64x64. Introduction After exploring diffusion on MNIST datasets, I have continued exploring more, successfully building a LDM on CIFAR-10 data. This post covers the first phase of a currently three month project helping to …" />
 <meta name="keywords" content="machine learning, cifar, diffusion, VAE">
 
 
   <meta property="og:site_name" content="Nathan Van Maastricht Blog"/>
   <meta property="og:title" content="Latent Diffusion Model on CIFAR-10"/>
-  <meta property="og:description" content="Project This project builds a Latent Diffusion Model (LDM) on CIFAR-10 that has been upscaled to 64x64. Introduction After exploring diffusion on MNIST datasets, I have continued exploring more, successfully build a LDM on CIFAR-10 data. This post covers the first phase of a currently three month project helping to …"/>
+  <meta property="og:description" content="Project This project builds a Latent Diffusion Model (LDM) on CIFAR-10 that has been upscaled to 64x64. Introduction After exploring diffusion on MNIST datasets, I have continued exploring more, successfully building a LDM on CIFAR-10 data. This post covers the first phase of a currently three month project helping to …"/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:url" content="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/articles/2026/01/latent-diffusion-model-on-cifar-10.html"/>
   <meta property="og:type" content="article"/>
@@ -127,7 +127,7 @@
     <h1>Project</h1>
 <p>This project builds a Latent Diffusion Model (LDM) on CIFAR-10 that has been upscaled to 64x64.</p>
 <h1>Introduction</h1>
-<p>After exploring diffusion on <a href="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/articles/2025/09/diffusion-models-for-mnist-data.html">MNIST datasets</a>, I have continued exploring more, successfully build a LDM on CIFAR-10 data. This post covers the first phase of a currently three month project helping to expand my knowledge around diffusion models. I'm going to keep this post relatively high level, with details in upcoming posts as I'm still continuing to work on this project.</p>
+<p>After exploring diffusion on <a href="https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/articles/2025/09/diffusion-models-for-mnist-data.html">MNIST datasets</a>, I have continued exploring more, successfully building a LDM on CIFAR-10 data. This post covers the first phase of a currently three month project helping to expand my knowledge around diffusion models. I'm going to keep this post relatively high level, with details in upcoming posts as I'm still continuing to work on this project.</p>
 <p>I'm going to describe the process I've gone through making a class conditioned latent diffusion model. I'm also going to drop the phrase "class conditioned" from now, but keep in mind that it is class conditioned, with classifier free guidance.</p>
 <h1>Background</h1>
 <p>I'm going to use the word MNIST to refer to both the MNIST digit dataset and the MNIST fashion dataset. Both of them posed roughly the same problems as each other. They are both <span class="math">\(1\times 28\times 28\)</span> images. Because it's easier to work with powers of two, I did add a 2 pixel padding to each side of the image to bring them up to <span class="math">\(1\times 32 \times 32\)</span> to make it easier to mentally reason about various up and down sampling aspects. MNIST was only ever meant to be a proving ground though, and never the end goal.</p>
@@ -172,11 +172,11 @@
 <h1>Results</h1>
 <h2>VAE-GAN</h2>
 <p>The VAE-GAN was trained for 300 epochs. The VAE ended up with fantastic reconstruction, with a MSE of roughly 0.01 compared with the ground truth image. The KL divergence was just below 1.0, so we didn't get collapse, but do have a pretty good space. The discriminator loss was roughly 0.66, which is right on the expected value for a confused discriminator. Overall, I'm very happy with the VAE after this training, although I could have had marginal improvements if I doubled the training time.</p>
-<p>This is an example of the VAE's reconstruction after 300 epochs</p>
+<p>This is an example of the VAE's reconstruction after 300 epochs. The top row is the original image, and the bottom row is the reconstruction by the VAE.</p>
 <p><img alt="VAE reconstruction" src="../../../images//diffusion_cifar/reconstruction_299.png"></p>
 <h2>UNET</h2>
 <p>The UNET was trained for 750 epochs. The UNET likewise did alright, with a MSE on the v prediction compared with v target over the latent space of roughly 0.3. Given the VAE could have been trained more, I'm more than happy with this. Sampling for 50 time steps with a classifier free guidance scale of 5.0 gives images that are recognisable as their label. Due to the upscaling of the original dataset, there is plenty of blur on these images, and the model is still confused with cats and dogs, especially their faces. Horses started to appear early in the training compared to the other classes, and boats and planes followed soon after.</p>
-<p>This is the result after the 750 training examples, and while I'm not thrilled with it, it did give me the confidence that I'm on the correct path and I'm calling the project a success.</p>
+<p>This is the result after the 750 training examples, and while I'm not thrilled with it, it did give me the confidence that I'm on the correct path and I'm calling the project a success. These images are all from the diffusion model, not from the original dataset.</p>
 <p><img alt="UNET sample" src="../../../images/diffusion_cifar/unet_sample.png"></p>
 <h1>Future Work</h1>
 <p>The purpose of this entire project was a stepping stone to a larger project. I'm already in the process of swapping to a larger dataset, ImageNet-1k, as well as higher resolution images, 256x256, rather than 64x64. I will continue to use the same model setup at a high level, although will need to tweak hyperparameters almost surely. But that is the next goal, have a large dataset with more variety.</p>
