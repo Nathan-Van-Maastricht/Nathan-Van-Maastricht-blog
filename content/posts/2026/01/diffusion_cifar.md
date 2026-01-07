@@ -9,7 +9,7 @@ This project builds a Latent Diffusion Model (LDM) on CIFAR-10 that has been ups
 
 # Introduction
 
-After exploring diffusion on [MNIST datasets](https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/articles/2025/09/diffusion-models-for-mnist-data.html), I have continued exploring more, successfully build a LDM on CIFAR-10 data. This post covers the first phase of a currently three month project helping to expand my knowledge around diffusion models. I'm going to keep this post relatively high level, with details in upcoming posts as I'm still continuing to work on this project.
+After exploring diffusion on [MNIST datasets](https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/articles/2025/09/diffusion-models-for-mnist-data.html), I have continued exploring more, successfully building a LDM on CIFAR-10 data. This post covers the first phase of a currently three month project helping to expand my knowledge around diffusion models. I'm going to keep this post relatively high level, with details in upcoming posts as I'm still continuing to work on this project.
 
 I'm going to describe the process I've gone through making a class conditioned latent diffusion model. I'm also going to drop the phrase "class conditioned" from now, but keep in mind that it is class conditioned, with classifier free guidance.
 
@@ -99,7 +99,7 @@ The reason to swap to v prediction in the first place was stability. It has a sm
 
 The VAE-GAN was trained for 300 epochs. The VAE ended up with fantastic reconstruction, with a MSE of roughly 0.01 compared with the ground truth image. The KL divergence was just below 1.0, so we didn't get collapse, but do have a pretty good space. The discriminator loss was roughly 0.66, which is right on the expected value for a confused discriminator. Overall, I'm very happy with the VAE after this training, although I could have had marginal improvements if I doubled the training time.
 
-This is an example of the VAE's reconstruction after 300 epochs
+This is an example of the VAE's reconstruction after 300 epochs. The top row is the original image, and the bottom row is the reconstruction by the VAE.
 
 ![VAE reconstruction](../../../images//diffusion_cifar/reconstruction_299.png)
 
@@ -107,7 +107,7 @@ This is an example of the VAE's reconstruction after 300 epochs
 
 The UNET was trained for 750 epochs. The UNET likewise did alright, with a MSE on the v prediction compared with v target over the latent space of roughly 0.3. Given the VAE could have been trained more, I'm more than happy with this. Sampling for 50 time steps with a classifier free guidance scale of 5.0 gives images that are recognisable as their label. Due to the upscaling of the original dataset, there is plenty of blur on these images, and the model is still confused with cats and dogs, especially their faces. Horses started to appear early in the training compared to the other classes, and boats and planes followed soon after.
 
-This is the result after the 750 training examples, and while I'm not thrilled with it, it did give me the confidence that I'm on the correct path and I'm calling the project a success.
+This is the result after the 750 training examples, and while I'm not thrilled with it, it did give me the confidence that I'm on the correct path and I'm calling the project a success. These images are all from the diffusion model, not from the original dataset.
 
 ![UNET sample](../../../images/diffusion_cifar/unet_sample.png)
 
