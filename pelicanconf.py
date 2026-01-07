@@ -49,5 +49,5 @@ READTIME_WPM = {
 SITEMAP = {
     "format": "xml",
     "priorities": {"articles": 0.75, "indexes": 0.5, "pages": 0.95},
-    "changefreqs": {"articles": "monthly", "indexes": "daily", "pages": "monthly"},
+    "changefreqs": {"articles": "monthly", "indexes": "daily", "pages": "monthly"}
 }

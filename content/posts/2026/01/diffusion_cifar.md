@@ -9,7 +9,7 @@ This project builds a Latent Diffusion Model (LDM) on CIFAR-10 that has been ups
 
 # Introduction
 
-After exploring diffusion on [MNIST datasets](diffusion-models-for-mnist-data.html), I have continued exploring more, successfully build a LDM on CIFAR-10 data. This post covers the first phase of a currently three month project helping to expand my knowledge around diffusion models. I'm going to keep this post relatively high level, with details in upcoming posts as I'm still continuing to work on this project.
+After exploring diffusion on [MNIST datasets](https://nathan-van-maastricht.github.io/Nathan-Van-Maastricht-blog/articles/2025/09/diffusion-models-for-mnist-data.html), I have continued exploring more, successfully build a LDM on CIFAR-10 data. This post covers the first phase of a currently three month project helping to expand my knowledge around diffusion models. I'm going to keep this post relatively high level, with details in upcoming posts as I'm still continuing to work on this project.
 
 I'm going to describe the process I've gone through making a class conditioned latent diffusion model. I'm also going to drop the phrase "class conditioned" from now, but keep in mind that it is class conditioned, with classifier free guidance.
 
