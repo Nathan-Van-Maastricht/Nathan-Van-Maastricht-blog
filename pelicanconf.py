@@ -29,6 +29,8 @@ EXTRA_PATH_METADATA = {
     'extra/favicon.ico': {'path': 'favicon.ico'}
 }
 
+FAVICON = "favicon.ico"
+
 ARTICLE_URL = "articles/{date:%Y}/{date:%m}/{slug}.html"
 ARTICLE_SAVE_AS = "articles/{date:%Y}/{date:%m}/{slug}.html"
 
