@@ -21,6 +21,14 @@ LINKS = (
     ("Github", "https://github.com/Nathan-Van-Maastricht"),
 )
 
+STATIC_PATHS = [
+    "images",
+    "extra",
+]
+EXTRA_PATH_METADATA = {
+    'extra/favicon.ico': {'path': 'favicon.ico'}
+}
+
 ARTICLE_URL = "articles/{date:%Y}/{date:%m}/{slug}.html"
 ARTICLE_SAVE_AS = "articles/{date:%Y}/{date:%m}/{slug}.html"
 
