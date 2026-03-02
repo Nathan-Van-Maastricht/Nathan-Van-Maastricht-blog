@@ -77,7 +77,7 @@ For the scaled dot-product attention I opted for PyTorch's optimised `scaled_dot
 
 The term $\frac{1}{\sqrt{d_k}}$ is the scaling term. As the dimensionality of the hidden states ($d_k$) increases, the magnitude of the dot products tends to grow. Without this scaling, the values entering the softmax would be extremely large, pushing the function into regions where the gradients are nearly zero. This small constant keeps the attention mechanism stable during the early, high variance stages of the training.
 
-In the code, this is handled by projecting the input into Query ($Q$), Key ($K$), and Value ($V$) tensors using $1\times 1$ convolutions, performing the attention operation, and then projecting back to the original channel dimension.s This ensures that the block only adds necessary global information without destroying the local features already learned by the preceding residual layers.
+In the code, this is handled by projecting the input into Query ($Q$), Key ($K$), and Value ($V$) tensors using $1\times 1$ convolutions, performing the attention operation, and then projecting back to the original channel dimension. This ensures that the block only adds necessary global information without destroying the local features already learned by the preceding residual layers.
 
 # Adversarial Training & Feature Matching
 
