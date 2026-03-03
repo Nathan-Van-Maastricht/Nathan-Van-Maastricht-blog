@@ -32,7 +32,7 @@ This image is the first image produced after an update of the weights. The top r
 
 ## Residual Blocks & GroupNorm
 
-At the heart of both the encoder and decoder are Residual Blocks. These allow the network to learn additive updates to the feature maps, which is essential for preserving signal integrity across many convolution layers, without them the gradient signal would like degrade significantly before reaching the earliest layers of the encoder.
+At the heart of both the encoder and decoder are Residual Blocks. These allow the network to learn additive updates to the feature maps, which is essential for preserving signal integrity across many convolution layers, without them the gradient signal would likely degrade significantly before reaching the earliest layers of the encoder.
 
 In my implementation, I opted for a "Pre-Activation" style layout, where the normalisation and activation occur before the convolution:
 
