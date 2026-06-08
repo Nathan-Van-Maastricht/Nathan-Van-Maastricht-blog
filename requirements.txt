@@ -1,0 +1,5 @@
+pelican
+markdown
+pelican-render-math
+pelican-readtime
+pelican-sitemap
