@@ -126,11 +126,11 @@ It's hard to get across to someone the nuance of what a sample image after 1000 
 
 This is an example of the very early stages of training. Can you tell why I stopped this run?
 
-![stopped run](/content/images/on_complexity_flow_matching/500_steps.png)
+![stopped run](../../../images/on_complexity_flow_matching/500_steps.png)
 
 This is an example of the blobs of colour, maybe a little further along than when I would have stopped the run if I didn't think it was going well before this.
 
-![blobby](/content/images/on_complexity_flow_matching/5500_steps.png)
+![blobby](../../../images/on_complexity_flow_matching/5500_steps.png)
 
 # What did I learn?
 
@@ -164,4 +164,4 @@ There will almost certainly be a version 2. But it's still mostly in the plannin
 
 Setting out, I wanted to broaden my skill set. What I didn't realise was how broad the set of skills I was going to improve was going to be. I've got more technical skills, a wider set of soft skills. I've had to balance my life with my partner who had to put up with my insanity. I've talked to people who have entered our home about the project when they see progress bars and logging information on my monitors. I've had to balance the enjoyment and stress of a long personal project with my professional life. There are only a few things I have done that have had this big of an impact on my life so far, it's touched every crevice of it at some point or another. Making me pick different, competing options. I had to pick and choose what parts of the project are suitable for an audience of technical and non technical people to try to give them a glimpse into the lifecycle of a text2image model. It's been fun.
 
-![Final output](/content/images/on_complexity_flow_matching/final.png)
+![Final output](../../../images/on_complexity_flow_matching/final.png)
