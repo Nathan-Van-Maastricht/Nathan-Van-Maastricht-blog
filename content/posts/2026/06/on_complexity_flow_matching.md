@@ -42,7 +42,7 @@ After working on one channel images up until this point, I decided I needed to s
 
 ## CIFAR-10 $64\times 64$
 
-This is where I really started to think about data questions. Firstly, how do I scale images up and remain at a high enough quality to be usable as a training target? Second, training over pixel space was really slow now, how do I improve that? This is where I started to look into [latent diffusion models](/content/posts/2026/01/diffusion_cifar.md). This added complexity, and the results were okay but not great. They were promising enough that I was confident I could move on though.
+This is where I really started to think about data questions. Firstly, how do I scale images up and remain at a high enough quality to be usable as a training target? Second, training over pixel space was really slow now, how do I improve that? This is where I started to look into [latent diffusion models](../../../articles/2026/01/latent-diffusion-model-on-cifar-10.html). This added complexity, and the results were okay but not great. They were promising enough that I was confident I could move on though.
 
 ## ImageNet-1k
 
