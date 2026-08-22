@@ -11,7 +11,7 @@ I'll roughly try to keep it in order of what I find most interesting and I will 
 
 ### Hobby
 
-By far the hardest and deepest project I've worked on. I had to train a language model, an autoencoder, and a flow matching model (which I colliquially call a diffusion model when talking to people who aren't deep in the space). From inception to completion of version 1 took about 9 months of work, with long training runs. [This post goes into more detail about the process and components, with links to even earlier posts](../../../articles/2025/11/the-complexity-of-building-a-flow-matching-model-for-fun.html)
+By far the hardest and deepest project I've worked on. I had to train a language model, an autoencoder, and a flow matching model (which I colliquially call a diffusion model when talking to people who aren't deep in the space). From inception to completion of version 1 took about 9 months of work, with long training runs. [This post goes into more detail about the process and components, with links to even earlier posts](../../../articles/2026/06/the-complexity-of-building-a-flow-matching-model-for-fun.html)
 
 Each step had different data requirements. The language model needed a nice balance of sentence structure to make the connections in english required for some form of semantic clarity, but at the same time it needed a large enough vocabulary that it could relate niche objects to common objects and settings. It also needed to not be surprised by the types of phrases in the training data for the text conditioning on images. It ended up being a combination of short stories, simple wikipedia, and the captions themselves that were used to train the language model.
 
@@ -61,7 +61,7 @@ Deep learning isn't everything. I find it very fun though. There's something tha
 
 But I also really enjoy metaheuristics, I think everyone should understand simulated annealing for example, it's history, what lead to it being such a good metaheuristic, why it's still used regularly today despite being so old. 
 
-Mathematical programming is also incredibly useful. I use Mixed Integer Linear Programming far more than I probably should, [some might say I optimise the fun out of games](../../../articles/2025/11/linear-programming-for-fun.html). I've never touched Eve Online, and I've never touched Factorio. Both of those games would consume my life. I'm also pretty sure both of those games will have many mathematical programming applications.
+Mathematical programming is also incredibly useful. I use Mixed Integer Linear Programming far more than I probably should, [some might say I optimise the fun out of games](../../../articles/2025/09/linear-programming-for-fun.html#linear-programming-for-fun). I've never touched Eve Online, and I've never touched Factorio. Both of those games would consume my life. I'm also pretty sure both of those games will have many mathematical programming applications.
 
 Then there's just good old algorithms to solve particular problems. Variations on A* for path finding, k-opt for combinatorial optimisation, binary search, the list can just go on and on.
 
