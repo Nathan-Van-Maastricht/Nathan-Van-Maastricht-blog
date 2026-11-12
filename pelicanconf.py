@@ -1,6 +1,12 @@
 AUTHOR = "Nathan Van Maastricht"
 SITENAME = "Nathan Van Maastricht Blog"
+SITETITLE = "Nathan Van Maastricht"
+SITESUBTITLE = "Machine learning, maths and algorithms"
+SITEDESCRIPTION = "Blog about machine learning, diffusion models, reinforcement learning and optimisation projects."
 SITEURL = ""
+
+COPYRIGHT_YEAR = 2026
+COPYRIGHT_NAME = "Nathan Van Maastricht"
 
 PATH = "content"
 
@@ -26,8 +32,7 @@ STATIC_PATHS = [
     "extra",
 ]
 EXTRA_PATH_METADATA = {
-    'extra/favicon.ico': {'path': 'favicon.ico'},
-    'extra/CNAME': {'path': 'CNAME'},
+    "extra/favicon.ico": {"path": "favicon.ico"},
 }
 
 FAVICON = "favicon.ico"
@@ -59,6 +64,16 @@ READTIME_WPM = {
 
 SITEMAP = {
     "format": "xml",
+    "exclude": [
+        "tag/",
+        "category/",
+        "author/",
+        "tags.html",
+        "categories.html",
+        "authors.html",
+        "archives.html",
+        "index2.html",
+    ],
     "priorities": {"articles": 0.75, "indexes": 0.5, "pages": 0.95},
-    "changefreqs": {"articles": "monthly", "indexes": "daily", "pages": "monthly"}
+    "changefreqs": {"articles": "monthly", "indexes": "daily", "pages": "monthly"},
 }
